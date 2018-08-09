@@ -1,53 +1,20 @@
 document.addEventListener('DOMContentLoaded', (ev) => {
     h1 = createH1();
-    
+        
     input = createInput();
-    
+        
     todoList = createToDoList();
 
     button = createButton();
-    
 
     button.addEventListener('click', (ev) => {
-        if (input.value !== "") {
-            let item = document.createElement('li');
-            item.textContent = input.value;
-            
-            //Create X Button, short for item button
-            itButton = createItButton(item);
-
-            //Create Edit Button
-            edButton = createEditButton(item, itButton);
-            
-            //Appending things
-            todoList.appendChild(item);
-
-            input.value = "";
-        } else {
-            alert("You have something to do!");
-        }
+        addTask(input);
     })
 
     input.addEventListener('keyup', (ev) => {
         if (ev.keyCode === 13) {
-            if (input.value !== "") {
-                let item = document.createElement('li');
-                item.textContent = input.value;
-                                
-                //Create X Button
-                itButton = createItButton(item);
-
-                //Create Edit Button
-                edButton = createEditButton(item, itButton);
-
-                //Append things                                
-                todoList.appendChild(item);
-
-                input.value = "";
-            }   else    {
-                alert("You have something to do!")
-            }
-        }
+        addTask(input);
+        }    
     })
 
     input.addEventListener('click', (ev) => {
@@ -83,8 +50,6 @@ document.addEventListener('DOMContentLoaded', (ev) => {
         button.setAttribute('id', 'add_todo');
         return button;
     }
-
-
 
     function createEditButton (item, itButton) {
         //Create button
@@ -132,5 +97,25 @@ document.addEventListener('DOMContentLoaded', (ev) => {
                 item.setAttribute('class', 'completed');
             });
         return itButton;
+    }
+
+    function addTask (input) {
+        if (input.value !== "") {
+            let item = document.createElement('li');
+            item.textContent = input.value;
+            
+            //Create X Button, short for item button
+            itButton = createItButton(item);
+    
+            //Create Edit Button
+            edButton = createEditButton(item, itButton);
+            
+            //Appending things
+            todoList.appendChild(item);
+    
+            input.value = "";
+        } else {
+            alert("You have something to do!");
+        }
     }
 })
